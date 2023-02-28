@@ -1,0 +1,24 @@
+<article *ngIf="article" class="flex flex-col justify-between h-full bg-white border-gray-200 border-2 p-6 shadow">
+  <h1 class="text-4xl my-3">{{article.title}}</h1>
+  <h4 class="text-xl my-3">{{article.subtitle}}</h4>
+  <figure class="self-center my-3">
+      <img class="max-w-full h-auto" src="{{article.imageUrl}}" alt="{{article.imageCaption}}">
+      <figcaption class="italic text-center">{{article.imageCaption}}</figcaption>
+  </figure>
+  <div *ngIf="!isDetail" class="text-justify my-3">
+      <p>{{article.content | shortenContent : 250}}</p>
+      <p class="py-2">
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" (click)="detail(article.id)">Read more</button>
+    </p>
+  </div>
+  <div *ngIf="isDetail"  class="text-justify my-3">
+      <p>{{article.content | capitalizeFirstWord}}</p>
+      <p class="py-2">
+        <button class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Read less</button>
+    </p>
+  </div>
+
+  <footer class="italic uppercase">
+      <p>Author: {{article.author}}, Published: {{article.publishDate}}</p>
+  </footer>
+</article>
